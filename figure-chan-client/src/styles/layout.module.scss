@@ -1,0 +1,240 @@
+.headerContainer {
+  display: flex;
+  width: 100%;
+  background-color: var(--layout-bg-color);
+  padding: 0.5em 1em;
+  justify-content: space-between;
+}
+.logo {
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+.mainContainer {
+  display: flex;
+  justify-content: center;
+}
+.footerContainer {
+  display: flex;
+  justify-content: center;
+  padding: 1em 0;
+  background-color: var(--layout-bg-color);
+}
+/*Card Styling*/
+.cardLayoutContainer {
+  gap: 1em;
+  display: flex;
+  width: 85%;
+  border-radius: 10px;
+  padding: 0.8em 0.5em;
+  background-color: var(--layout-bg-main-ctn-color);
+}
+.mainContent {
+  width: 70%;
+}
+.sideContent {
+  width: 30%;
+}
+.cardContainer {
+  width: 100%;
+  background-color: var(--layout-bg-card-color);
+  border: 1px solid rgb(99, 99, 99);
+  margin-bottom: 1em;
+}
+.cardHeader {
+  padding: 0.3em 0.3em;
+  font-weight: 600;
+  font-size: 1.2rem;
+  border-bottom: 1px solid var(--layout-card-btm-outline-color);
+}
+.entryListContainer {
+  padding: 2% 2%;
+}
+.entryListContainer img {
+  cursor: pointer;
+  aspect-ratio: auto 1/1;
+  object-fit: cover;
+  border: 5px solid gray;
+  width: 100px;
+  height: 150px;
+}
+.cardBody {
+  align-items: center;
+  padding: 2% 2%;
+}
+.cardTitle:hover {
+  text-decoration: underline;
+}
+.cardBody img {
+  object-fit: fill;
+}
+.cardIcon {
+  margin: 0.4em 0.5em;
+}
+.cardTitle {
+  font-size: 1rem;
+}
+.cardDesc {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.7rem;
+}
+.cardRowBody {
+  display: flex;
+  flex: 1;
+}
+.cardRowSubHeaderTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0.2em 0.7em;
+  border-bottom: 1px solid var(--layout-bg-main-ctn-color);
+}
+.boardPreviewImg {
+  margin-right: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.boardPreviewImg img {
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+}
+.rowImg {
+  min-width: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 0.5em;
+}
+.rowImg img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.cardRowContainer {
+  cursor: pointer;
+  padding: 0.3em;
+  width: 100%;
+  margin-bottom: 0.2em;
+  background-color: var(--layout-bg-main-ctn-color);
+  border: 1px solid rgb(105, 105, 105);
+}
+
+/*Navigation Styling*/
+.navbar ul {
+  display: flex;
+  list-style: none;
+}
+.navbar ul .navListOpt:hover {
+  background-color: var(--layout-sub-hover-color);
+  transition: background-color 0.5s;
+}
+.navListOpt {
+  font-size: 1.1rem;
+}
+.navbar ul li a {
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+  font-family: var(--font-formal-family);
+  text-shadow: 0px 2px 5px rgb(17, 17, 17);
+}
+.navOpt {
+  background-color: rgb(63, 63, 63);
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 6.6em;
+  width: 200px;
+  animation: fadeInList 0.3s;
+  z-index: 999;
+}
+.navOpt li {
+  padding: 0.2rem 0.5rem;
+}
+.navOpt li:hover {
+  background-color: rgb(99, 99, 99);
+}
+.navOpt li a {
+  font-size: 1rem;
+  width: 100%;
+}
+.navContainer {
+  width: 100%;
+  background-color: var(--layout-bg-nav-color);
+  display: flex;
+}
+.navContainer ul {
+  display: flex;
+  list-style: none;
+}
+.navContainer li {
+  padding: 0.7em;
+  font-weight: 600;
+  cursor: pointer;
+}
+.navContainer ul li:hover {
+  background-color: var(--layout-bg-color);
+}
+.navSearchContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+}
+.searchInput,
+.searchBtn {
+  background-color: rgb(68, 68, 68);
+  color: white;
+  border-radius: 15px;
+  font-weight: 1.2rem;
+}
+.searchInput {
+  padding-left: 0.5em;
+  width: 100%;
+}
+.loginBtn,
+.regBtn {
+  padding: 0em 1em;
+  background-color: var(--layout-bg-color);
+  border-radius: 8px;
+}
+.regBtn {
+  color: black;
+  background-color: white;
+}
+.loginBtn:hover {
+  background-color: #7a1841;
+}
+.regBtn:hover {
+  background-color: var(--layout-bg-color);
+  color: white;
+}
+
+/*Swiper Slide*/
+.swiper {
+  width: 95%;
+  transition-timing-function: linear;
+  margin-bottom: 1rem;
+}
+.swiperSlide {
+  max-height: 150px;
+  cursor: pointer;
+  align-self: center;
+}
+.swiperSlide img {
+  transition: transform 0.3s;
+  object-fit: cover;
+  max-width: 100%;
+  max-height: 100%;
+  object-position: center;
+}
+.swiperSlide img:hover {
+  transform: scale(1.1);
+}
+
+.boardPreviewTitle {
+  color: rgb(251, 176, 189);
+}

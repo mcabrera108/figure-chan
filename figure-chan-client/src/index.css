@@ -1,0 +1,17 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+  color: white;
+}
+:root {
+  --layout-bg-color: #aa4b73;
+  --layout-bg-nav-color: #9b2e5b;
+  --layout-bg-main-ctn-color: rgb(87, 87, 87);
+  --layout-bg-card-color: rgb(65, 65, 65);
+  --layout-card-btm-outline-color: rgb(158, 158, 158);
+  --swiper-navigation-color: #fff;
+}
+main {
+  min-height: 100vh;
+}
