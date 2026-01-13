@@ -1,9 +1,11 @@
-name: Figure-Chan CI/CD Pipeline
+name: Figure-Chan Client CI/CD Pipeline
 
 on:
   push:
     branches:
       - main
+    paths:
+      - "figure-chan-client/**"
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
