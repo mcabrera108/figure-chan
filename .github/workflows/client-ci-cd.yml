@@ -10,5 +10,37 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
     steps:
-      - name: Example-Step
-        run: echo "Hello World!"
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - name: Install Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 25.x
+      - name: Install Dependencies
+        run: npm install
+      - name: Build Project
+        run: npm run build
+      - name: Upload Artifact to enable deployment
+        uses: actions/upload-artifact@v3
+        with:
+          name: PROD
+          path: ./dist
+  deploy:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: PROD
+          path: ./dist
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v3.0
+        with:
+          publish-dir: "./figure-chan-client/dist"
+          production-branch: main
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          deploy-message: "Deploy from Github Actions"
+        env:
+          NETLIFY_AUTH_TOKEN: ${{secrets.NETLIFY_AUTH_TOKEN}}
+          NETLIFY_SITE_ID: ${{secrets.NETLIFY_SITE_ID}}
