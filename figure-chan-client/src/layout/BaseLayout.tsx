@@ -1,4 +1,4 @@
 function BaseLayout() {
-  return <>Hello World</>;
+  return <>Hello World!</>;
 }
 export default BaseLayout;
