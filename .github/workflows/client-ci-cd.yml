@@ -4,11 +4,12 @@ on:
   push:
     branches:
       - main
-    paths:
-      - "figure-chan-client/**"
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: figure-chan-client
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
