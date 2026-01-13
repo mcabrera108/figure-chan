@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - "figure-chan-client/**"
+      - figure-chan-client
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
