@@ -1,0 +1,12 @@
+name: Figure-Chan CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Example-Step
+        run: echo "Hello World!"
