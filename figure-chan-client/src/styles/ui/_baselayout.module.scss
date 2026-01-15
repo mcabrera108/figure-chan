@@ -1,0 +1,137 @@
+/*Header Components*/
+.headerContainer {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+.headerWrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  background-color: var(--layout-bg-color);
+  padding: 0.5em 1em;
+  box-shadow: 0px 0.5px 2px var(--layout-bg-second-color);
+}
+.logoContainer {
+  display: flex;
+  gap: 1em;
+}
+.logo {
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+.searchContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  max-width: 40%;
+}
+.searchInput,
+.searchBtn {
+  background-color: rgb(82, 82, 82);
+  color: white;
+  border-radius: 15px;
+  font-weight: 1.2rem;
+}
+.loginBtn,
+.regBtn {
+  padding: 0em 1em;
+  background-color: var(--layout-bg-color);
+  border-radius: 8px;
+}
+.loginBtnContainer {
+  display: flex;
+  align-items: center;
+}
+.headerIconContainer {
+  margin-right: 1em;
+}
+.regBtn {
+  color: black;
+  background-color: white;
+}
+.loginBtn:hover {
+  background-color: #7a1841;
+}
+.regBtn:hover {
+  background-color: var(--layout-bg-color);
+  color: white;
+}
+/*Navigation*/
+.navContainer {
+  width: 100%;
+  background-color: var(--layout-bg-second-color);
+  display: flex;
+  box-shadow: 0px 0.5px 0px black;
+}
+.navContainer ul {
+  display: flex;
+  list-style: none;
+}
+.navContainer li {
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+.navContainer a {
+  display: block;
+  padding: 0.7em;
+}
+.navContainer ul li:hover {
+  background-color: var(--layout-bg-color);
+}
+/*Loader Components*/
+/* Credit: Temani Afif for providing Spinner CSS */
+/* HTML: <div class="loader"></div> */
+.loadingScreen {
+  position: absolute;
+  z-index: 999;
+  background-color: rgb(43, 43, 43);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loaderContainer {
+  gap: 15px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+.loader {
+  width: 50px;
+  aspect-ratio: 1;
+  display: grid;
+  -webkit-mask: conic-gradient(from 15deg, #0000, #000);
+  animation: loaderSpinner 1s infinite steps(12);
+}
+.loader,
+.loader:before,
+.loader:after {
+  background: radial-gradient(closest-side at 50% 12.5%, #f03355 96%, #0000) 50%
+      0/20% 80% repeat-y,
+    radial-gradient(closest-side at 12.5% 50%, #f03355 96%, #0000) 0 50%/80% 20%
+      repeat-x;
+}
+.loader:before,
+.loader:after {
+  content: "";
+  grid-area: 1/1;
+  transform: rotate(30deg);
+}
+.loader:after {
+  transform: rotate(60deg);
+}
+/*Notification Component*/
+.notificationContainer {
+  position: fixed;
+  left: 70%;
+  top: 8%;
+  max-width: 25%;
+  z-index: 999;
+  animation: notificationPopup 3s ease-in-out;
+}
