@@ -1,28 +1,50 @@
 import style from "../../styles/layout.module.scss";
-import { Link } from "react-router-dom";
+import NavItem from "./NavItem";
+const navMenuOptions = [
+  {
+    navMenuName: "Database",
+    navMenuItems: [
+      {
+        navMenuItemName: "Search",
+        navMenuItemUrl: "/search",
+      },
+      {
+        navMenuItemName: "Recent Submissions",
+        navMenuItemUrl: "/search",
+      },
+    ],
+    navMenuUrl: "/search",
+  },
+  // {
+  //   navMenuName: "Database",
+  //   navMenuItems: [
+  //     {
+  //       navMenuItemName: "Search",
+  //       navMenuItemUrl: "/search",
+  //     },
+  //     {
+  //       navMenuItemName: "Search",
+  //       navMenuItemUrl: "/search",
+  //     },
+  //   ],
+  //   navMenuUrl: "/search",
+  // },
+];
 function Navigation() {
   return (
     <div className={style.navContainer}>
       <nav>
         <ul>
-          <li>
-            <Link to={"/search"}>Database</Link>
-          </li>
-          {/* <li>
-            <Link to={"/"}>Community</Link>
-          </li>
-          <li>
-            <Link to={"/"}>News</Link>
-          </li>
-          <li>
-            <Link to={"/"}>Gallery</Link>
-          </li>
-          <li>
-            <Link to={"/"}>Shop</Link>
-          </li>
-          <li>
-            <Link to={"/"}>Help</Link>
-          </li> */}
+          {navMenuOptions.map((item, index) => {
+            return (
+              <NavItem
+                navMenuUrl={item.navMenuUrl}
+                navMenuName={item.navMenuName}
+                navMenuItems={item.navMenuItems}
+                key={index}
+              />
+            );
+          })}
         </ul>
       </nav>
     </div>

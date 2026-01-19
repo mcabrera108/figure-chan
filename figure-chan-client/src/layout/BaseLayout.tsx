@@ -18,8 +18,10 @@ function BaseLayout() {
       >
         <Header />
         <main>
-          <div className={style.baseLayoutContainer}>
-            <Outlet />
+          <div className={style.base}>
+            <div className={style.baseLayoutContainer}>
+              <Outlet />
+            </div>
           </div>
         </main>
         <Footer />
