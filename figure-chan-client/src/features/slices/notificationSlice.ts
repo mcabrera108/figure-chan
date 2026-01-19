@@ -4,12 +4,12 @@ const notificationSlice = createSlice({
   name: "notification",
   initialState: null,
   reducers: {
-    initializeMessage: (_state, action) => {
-      _state = action.payload;
+    initializeMessage: (state, action) => {
+      state = action.payload;
     },
-    uninitializeMessage: (_state, action) => {
+    uninitializeMessage: (state, action) => {
       if (action.payload === null) {
-        _state = null;
+        state = null;
       }
     },
   },

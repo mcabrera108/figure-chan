@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import style from "../../styles/layout.module.scss";
 import { loadingState } from "../../features/slices/loadingSlice";
-import Loading from "./Loading";
+//import Loading from "./Loading";
 import { useState, type FormEvent } from "react";
 import { initializeMessage } from "../../features/slices/notificationSlice";
 import { useNavigate } from "react-router-dom";
@@ -11,15 +11,15 @@ import useMobileSize from "../../hooks/useMobileSize";
 import MobNavigation from "../mobile/button/MobNavigation";
 import Search from "./Search";
 import { HStack } from "@chakra-ui/react";
-import IconButton from "./button/IconButton";
+import IconButton from "../common/button/IconButton";
 import Navigation from "./Navigation";
-import LinkButton from "./button/LinkButton";
+import LinkButton from "../common/button/LinkButton";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 export default function Header() {
   const [isError, setIsError] = useState(false);
   const [isSearchCollapsed, setIsSearchCollapsed] = useState(false);
 
-  const loading = useAppSelector((state) => state.loading);
+  //const loading = useAppSelector((state) => state.loading);
   const notification = useAppSelector((state) => state.notification);
   const user = useAppSelector((state) => state.user);
 
@@ -33,6 +33,7 @@ export default function Header() {
 
     try {
       dispatch(loadingState(true));
+      console.log("Insert Function Here");
 
       setIsError(false);
       navigate("/");
@@ -48,7 +49,6 @@ export default function Header() {
     setIsSearchCollapsed(!isSearchCollapsed);
   }
   function handleNavCollapsed() {}
-  if (loading) return <Loading />;
 
   return (
     <>
@@ -104,8 +104,9 @@ export default function Header() {
             )}
           </div>
         </header>
+        {isSmallScreen ? <></> : <Navigation />}
       </div>
-      {isSmallScreen ? <></> : <Navigation />}
+
       {isSearchCollapsed && isSmallScreen ? (
         <div className={style.collapsedSearchContainer}>
           <Search />

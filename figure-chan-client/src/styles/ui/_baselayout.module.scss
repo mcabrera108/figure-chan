@@ -1,3 +1,13 @@
+/*Page Layout Components*/
+.baseLayoutContainer {
+  display: flex;
+  margin: 1em 0 1em 0;
+  justify-self: center;
+  width: 85%;
+  min-height: 100vh;
+  border-radius: 5px;
+  background-color: var(--layout-bg-default-ctn-color);
+}
 /*Header Components*/
 .headerContainer {
   position: sticky;
@@ -19,6 +29,15 @@
 .logo {
   font-size: 1.8rem;
   font-weight: 600;
+}
+.collapsedSearchContainer {
+  position: sticky;
+  top: 8%;
+  left: 0;
+  right: 0;
+}
+.mainCard {
+  width: 100%;
 }
 .searchContainer {
   display: flex;
@@ -79,6 +98,13 @@
   padding: 0.7em;
 }
 .navContainer ul li:hover {
+  background-color: var(--layout-bg-color);
+}
+/*Footer Components*/
+.footerContainer {
+  display: flex;
+  justify-content: center;
+  padding: 1em 0;
   background-color: var(--layout-bg-color);
 }
 /*Loader Components*/

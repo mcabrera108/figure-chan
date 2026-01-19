@@ -1,4 +1,7 @@
 @use "./ui/baselayout.module";
+@use "./pages/homelayout.module";
+@use "./common/cardlayout.module";
+@use "./pages/authuserpagelayout.module";
 
 /*Centralize Responsive and Animation Media Queries */
 @keyframes loaderSpinner {
@@ -49,6 +52,37 @@
     max-width: 100%;
     animation: searchPopup 0.2s ease-in;
   }
+  .baseLayout {
+    width: 95%;
+    height: 100%;
+  }
+  .homePageContainer {
+    flex-direction: column;
+    padding: 0.3em;
+  }
+  .mainContentContainer,
+  .sideContentContainer {
+    width: 100%;
+  }
+  .baseLayoutContainer {
+    width: 95%;
+  }
+  .cardButton {
+    min-width: 0;
+    font-size: 0.6rem;
+    padding: 0.3rem 0.2rem;
+  }
+  .headerTitle {
+    font-size: 1rem;
+  }
 }
 @media screen and (min-width: 921px) and (max-width: 1120px) {
+  .cardButton {
+    min-width: 60px;
+    font-size: 0.8rem;
+    padding: 0.5rem 0.4rem;
+  }
+  .headerTitle {
+    font-size: 1rem;
+  }
 }

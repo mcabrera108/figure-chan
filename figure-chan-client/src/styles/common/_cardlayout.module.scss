@@ -1,0 +1,40 @@
+.cardHeader {
+  padding: 0.5em 0.3em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+}
+.iconContainer {
+  display: flex;
+  align-items: center;
+}
+.headerTitle {
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+.cardHeaderIconContainer {
+  display: flex;
+}
+.cardButtonItem {
+  margin: 0 0.2em;
+}
+.cardButton {
+  padding: 0.5rem 0.4rem;
+  font-size: 0.8rem;
+  height: 95%;
+  min-width: 120px;
+  background-color: var(--card-bg-second-color);
+}
+.cardButton:hover {
+  background-color: var(--card-outline-color);
+}
+.cardIcon {
+  margin: 0.4em 0.5em;
+}
+.cardBody {
+  padding: 0% 2% 2% 2%;
+}
+.cardBody img {
+  object-fit: fill;
+}

@@ -17,6 +17,7 @@ function Search() {
           onChange={(e) => {
             setSearchInput(e.target.value);
           }}
+          id="search"
           name="search"
           variant={"subtle"}
           _placeholder={{ color: "rgb(110, 110, 110)" }}

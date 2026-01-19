@@ -1,9 +1,9 @@
 import { Outlet } from "react-router-dom";
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
-import style from "../styles/layout.module.scss";
 import { getCloudinaryImage } from "../utils/cloudinary";
-function BaseLayout() {
+
+function AuthLayout() {
   const myImage = getCloudinaryImage("godzilla_nhi07c");
   return (
     <>
@@ -12,13 +12,13 @@ function BaseLayout() {
           background: `linear-gradient(0deg, rgba(0, 0, 0, 0.623), rgba(0, 0, 0, 0.623)), url(${myImage.toURL()})`,
           width: "100%",
           height: "100%",
-          minHeight: "120vh",
+          minHeight: "100vh",
           objectFit: "fill",
         }}
       >
         <Header />
         <main>
-          <div className={style.baseLayoutContainer}>
+          <div>
             <Outlet />
           </div>
         </main>
@@ -27,4 +27,4 @@ function BaseLayout() {
     </>
   );
 }
-export default BaseLayout;
+export default AuthLayout;

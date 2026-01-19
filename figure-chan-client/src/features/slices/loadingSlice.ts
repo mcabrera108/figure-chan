@@ -4,8 +4,9 @@ const loadingSlice = createSlice({
   name: "loading",
   initialState: false,
   reducers: {
-    loadingState: (_state, action) => {
-      _state = action.payload;
+    loadingState: (state, action) => {
+      state = action.payload;
+      return state;
     },
   },
 });

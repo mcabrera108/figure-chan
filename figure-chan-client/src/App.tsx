@@ -1,3 +1,4 @@
+import AuthLayout from "./layout/AuthLayout";
 import BaseLayout from "./layout/BaseLayout";
 import ProfileLayout from "./layout/ProfileLayout";
 
@@ -7,6 +8,8 @@ function App(props: { page: string }) {
       return <BaseLayout />;
     case "profile":
       return <ProfileLayout />;
+    case "auth":
+      return <AuthLayout />;
     default: {
       return <BaseLayout />;
     }

@@ -1,0 +1,44 @@
+.formHeaderContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+.formHeader {
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.4rem;
+  margin-bottom: 0.3rem;
+}
+.formSubHeader {
+  font-weight: 500;
+}
+.formSubHeader a {
+  text-decoration: underline;
+}
+.authPageContainer {
+  display: flex;
+  padding: 2em 0.5em;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+.authPageWrapper {
+  display: flex;
+  width: 95%;
+  justify-content: center;
+}
+.authPageBodyContainer {
+  max-height: 80vh;
+  gap: 1em;
+  margin-top: 0.5em;
+  border-radius: 10px;
+  padding: 0.8em 0.5em;
+}
+.authFormSubmitBtn {
+  background-color: var(--layout-bg-second-color);
+}
+.authFormSubmitBtn:hover {
+  background-color: var(--layout-bg-color);
+}
