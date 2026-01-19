@@ -6,10 +6,12 @@ const notificationSlice = createSlice({
   reducers: {
     initializeMessage: (state, action) => {
       state = action.payload;
+      return state;
     },
     uninitializeMessage: (state, action) => {
       if (action.payload === null) {
         state = null;
+        return state;
       }
     },
   },
