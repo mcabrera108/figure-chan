@@ -1,0 +1,108 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Users {
+  id Int @id @default(autoincrement())
+  email String @unique
+  username String @unique @db.VarChar(50)
+  password String @unique
+  emailVerified Boolean @default(false)
+  role String @default("User")
+  profileId Profile?
+  tokenBlacklistId TokenBlacklist[]
+}
+model Profile {
+  id Int @id @default(autoincrement())
+  profilePhoto String?
+  user Users @relation(fields: [userId], references: [id])
+  userId Int @unique // Foreign Check
+  posts Posts[]
+}
+model Posts {
+  id Int @id @default(autoincrement())
+  imageUrl String
+  title String
+  profile Profile @relation(fields: [profileId], references: [id])
+  profileId Int
+}
+model TokenBlacklist {
+  id Int @id @default(autoincrement())
+  user Users @relation(fields: [userId], references: [id])
+  userId Int @unique
+  tokenId Int @unique
+  expiresAt DateTime
+}
+model Lists {
+  id Int @id @default(autoincrement())
+  itemId Items[]
+}
+model Items {
+  id Int @id @default(autoincrement())
+  listId Lists[]
+  title String @unique
+  releaseDate DateTime
+  imageUrl String
+  
+  companyId Companies[]
+  characterId Characters[]
+
+  subcategory SubCategories @relation(fields: [subcategoryId], references: [id])
+  subcategoryId Int
+
+  series SeriesEntry @relation(fields: [seriesId], references: [id])
+  seriesId Int
+
+}
+model SubCategories {
+  id Int @id @default(autoincrement())
+  name String
+  itemId Items[]
+  category Categories @relation(fields: [categoryId], references: [id])
+  categoryId Int
+}
+model Categories {
+  id Int @id @default(autoincrement())
+  name String
+  subcategoryId SubCategories[]
+}
+model Companies {
+  id Int @id @default(autoincrement())
+  name String
+  url String
+  logoImgUrl String
+  itemId Items[]
+}
+model Characters {
+  id Int @id @default(autoincrement())
+  name String
+  characterImgUrl String
+  itemId Items[]
+}
+
+model SeriesEntry {
+  id Int @id @default(autoincrement())
+  title String
+
+  itemId Items[]
+
+  series Series @relation(fields: [seriesId], references: [id])
+  seriesId Int
+}
+model Series {
+  id Int @id @default(autoincrement())
+  title String
+  
+  seriesEntries SeriesEntry[]
+}
