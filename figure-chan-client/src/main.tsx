@@ -5,13 +5,16 @@ import { store } from "./store/store";
 import "./index.css";
 import Router from "./Router";
 import { Provider } from "./features/ui/provider";
+import AuthContext from "./context/AuthContext";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ReduxProvider store={store}>
-      <Provider>
-        <Router />
-      </Provider>
+      <AuthContext>
+        <Provider>
+          <Router />
+        </Provider>
+      </AuthContext>
     </ReduxProvider>
-  </StrictMode>
+  </StrictMode>,
 );

@@ -1,4 +1,4 @@
-import { useReducer, useState, type FormEvent } from "react";
+import { useEffect, useReducer, useState, type FormEvent } from "react";
 import Loading from "../../components/layout/Loading";
 import { useAppSelector, useAppDispatch } from "../../hooks/reduxHooks";
 import style from "../../styles/layout.module.scss";
@@ -8,7 +8,12 @@ import { Button, Field, Input, InputGroup, Stack } from "@chakra-ui/react";
 import { LuAsterisk, LuUser } from "react-icons/lu";
 import { PasswordInput } from "../../features/ui/password-input";
 import { loadingState } from "../../features/slices/loadingSlice";
-import { initializeMessage } from "../../features/slices/notificationSlice";
+import {
+  initializeMessage,
+  uninitializeMessage,
+} from "../../features/slices/notificationSlice";
+import { loginUserAPI } from "../../services/userServices";
+import { loginUser } from "../../features/slices/userSlice";
 
 const initialLoginState = {
   username: "",
@@ -48,22 +53,55 @@ function LoginPage() {
     });
   }
 
-  function handleUserLogin(e: FormEvent) {
+  async function handleUserLogin(e: FormEvent) {
     e.preventDefault();
-
     try {
+      if (!state.username || !state.password) {
+        throw new Error("Please enter valid credentials.");
+      }
       loginDispatch(loadingState(true));
 
-      setIsError(false);
+      const apiResponse = await loginUserAPI(state.username, state.password);
 
-      navigate(`/login`);
+      const result = await apiResponse.json();
+
+      if (!apiResponse.ok) {
+        throw new Error(result.message);
+      }
+
+      loginDispatch(
+        loginUser({
+          username: result.username,
+          profileLink: result.profilePic,
+        }),
+      );
+
+      if (!result.username) {
+        throw new Error("Please enter valid credentials.");
+      }
+
+      setIsError(false);
+      navigate(`/profile/${result.username}`);
     } catch (error) {
       setIsError(true);
       loginDispatch(initializeMessage(String(error)));
     } finally {
+      dispatch({
+        type: "update",
+        field: "password" as "username" | "password",
+        value: "",
+      });
       loginDispatch(loadingState(false));
     }
   }
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      loginDispatch(uninitializeMessage(null));
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, [loginDispatch, notification]);
   if (loading) {
     return <Loading />;
   }

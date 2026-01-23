@@ -1,9 +1,14 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import App from "./App";
 import ErrorPage from "./pages/Error/ErrorPage";
 import HomePage from "./pages/Home/HomePage";
 import LoginPage from "./pages/Login/LoginPage";
 import RegisterPage from "./pages/Register/RegisterPage";
+import ProfilePage from "./pages/Profile/ProfilePage";
 function Router() {
   const router = createBrowserRouter([
     {
@@ -29,6 +34,21 @@ function Router() {
         {
           path: "/register",
           element: <RegisterPage />,
+        },
+      ],
+    },
+    {
+      path: "/profile",
+      element: <App page={"profile"} />,
+      errorElement: <ErrorPage />,
+      children: [
+        {
+          path: "/profile",
+          element: <Navigate to={"/"} />,
+        },
+        {
+          path: "/profile/:id",
+          element: <ProfilePage />,
         },
       ],
     },

@@ -2,9 +2,16 @@ import { Outlet } from "react-router-dom";
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
 import { getCloudinaryImage } from "../utils/cloudinary";
-
+import { useEffect } from "react";
+import { useAppDispatch } from "../hooks/reduxHooks";
+import { uninitializeMessage } from "../features/slices/notificationSlice";
 function AuthLayout() {
   const myImage = getCloudinaryImage("godzilla_nhi07c");
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(uninitializeMessage(null));
+  }, [dispatch]);
   return (
     <>
       <div
