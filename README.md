@@ -35,6 +35,7 @@ Run Client:
 
 - Navigate to figure-chan-client
 - Run `npm install` to install package dependencies
+- Populate .env with cloudinary credentials
 - Run `npm run dev` to run application
 - Navigate to localhost:5173 on local browser
 
