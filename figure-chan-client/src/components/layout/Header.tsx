@@ -20,8 +20,10 @@ import { CloudinaryImage } from "@cloudinary/url-gen/index";
 import { getCloudinaryImage } from "../../utils/cloudinary";
 import { logoutUserAPI } from "../../services/userServices";
 import { logoutUser } from "../../features/slices/userSlice";
+import Loading from "./Loading";
 export default function Header() {
   const [isError, setIsError] = useState(false);
+  const loading = useAppSelector((state) => state.loading);
   const [isSearchCollapsed, setIsSearchCollapsed] = useState(false);
   const [profileImg, setProfileImg] = useState<null | CloudinaryImage>(null);
   const notification = useAppSelector((state) => state.notification);
@@ -47,7 +49,7 @@ export default function Header() {
       dispatch(logoutUser({ username: null, profileLink: null }));
 
       setIsError(false);
-      navigate("/");
+      navigate("/", { replace: true });
     } catch (error) {
       setIsError(true);
       dispatch(initializeMessage(error));
@@ -70,6 +72,10 @@ export default function Header() {
     }
     renderProfileView();
   }, [user]);
+
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <>
       {notification ? (

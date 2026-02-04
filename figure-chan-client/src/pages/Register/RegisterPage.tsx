@@ -1,12 +1,16 @@
-import { useReducer, useState, type FormEvent } from "react";
+import { useEffect, useReducer, useState, type FormEvent } from "react";
 import Notification from "../../components/layout/Notification";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import style from "../../styles/layout.module.scss";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button, Field, Input, InputGroup, Stack } from "@chakra-ui/react";
 import { LuAsterisk, LuUser } from "react-icons/lu";
 import { loadingState } from "../../features/slices/loadingSlice";
-import { initializeMessage } from "../../features/slices/notificationSlice";
+import {
+  initializeMessage,
+  uninitializeMessage,
+} from "../../features/slices/notificationSlice";
+import getPasswordStrengthValue from "./utils/getPasswordStrengthValue";
 import {
   PasswordInput,
   PasswordStrengthMeter,
@@ -16,7 +20,10 @@ import {
   passwordHasOneNumber,
   passwordHasOneSpecialCharacter,
   passwordIsAboveCharCount,
+  passwordValidator,
 } from "../../utils/passwordStrengthUtil";
+import { registerUserAPI } from "../../services/userServices";
+import Loading from "../../components/layout/Loading";
 const initialRegisterState = {
   username: "",
   email: "",
@@ -29,11 +36,11 @@ interface State {
   email: string;
   confirmPassword: string;
 }
-type Action = {
-  type: "update";
+interface Action {
+  type: "update" | "reset";
   field: "username" | "password" | "email" | "confirmPassword";
   value: string;
-};
+}
 
 function registerReducer(state: State, action: Action) {
   switch (action.type) {
@@ -42,17 +49,19 @@ function registerReducer(state: State, action: Action) {
         ...state,
         [action.field]: action.value,
       };
+    case "reset":
+      return initialRegisterState;
     default:
       throw new Error("Unable to update UI form");
   }
 }
 function RegisterPage() {
+  const loading = useAppSelector((state) => state.loading);
   const notification = useAppSelector((state) => state.notification);
   const [isError, setIsError] = useState(false);
   const [state, dispatch] = useReducer(registerReducer, initialRegisterState);
 
   const registerDispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   function handleRegisterChange(e: React.ChangeEvent<HTMLInputElement>) {
     dispatch({
@@ -65,41 +74,64 @@ function RegisterPage() {
       value: e.target.value,
     });
   }
-  function getPasswordStrengthValue(input: string) {
-    let value = 0;
 
-    if (passwordIsAboveCharCount(input)) {
-      value += 1;
-    }
-    if (passwordHasOneLetter(input)) {
-      value += 1;
-    }
-    if (passwordHasOneSpecialCharacter(input)) {
-      value += 1;
-    }
-    if (passwordHasOneNumber(input)) {
-      value += 1;
-    }
-
-    return value;
-  }
-  function handleUserRegister(e: FormEvent) {
+  async function handleUserRegister(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     try {
       registerDispatch(loadingState(true));
 
-      setIsError(false);
+      if (!state.username || !state.password || !state.email) {
+        throw new Error("Please enter valid information.");
+      }
 
-      navigate(`/register`);
+      if (
+        !state.confirmPassword ||
+        state.password !== state.confirmPassword ||
+        passwordValidator(state.password) === false
+      ) {
+        throw new Error("Please enter a valid password");
+      }
+
+      const apiResponse = await registerUserAPI(
+        state.username,
+        state.email,
+        state.password,
+      );
+
+      const result = await apiResponse.json();
+
+      if (!apiResponse.ok) {
+        throw new Error(result.message);
+      }
+
+      setIsError(false);
+      registerDispatch(initializeMessage(String(result.message)));
     } catch (error) {
       setIsError(true);
       registerDispatch(initializeMessage(String(error)));
     } finally {
+      dispatch({
+        type: "reset",
+        field: "username",
+        value: "",
+      });
       registerDispatch(loadingState(false));
     }
   }
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsError(false);
+      registerDispatch(uninitializeMessage(null));
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, [registerDispatch, notification]);
+
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <>
       {notification ? (

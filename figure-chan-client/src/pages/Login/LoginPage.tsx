@@ -81,7 +81,7 @@ function LoginPage() {
       }
 
       setIsError(false);
-      navigate(`/profile/${result.username}`);
+      navigate(`/profile/${result.username}`, { replace: true });
     } catch (error) {
       setIsError(true);
       loginDispatch(initializeMessage(String(error)));
@@ -97,11 +97,13 @@ function LoginPage() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
+      setIsError(false);
       loginDispatch(uninitializeMessage(null));
     }, 5000);
 
     return () => clearTimeout(timer);
   }, [loginDispatch, notification]);
+
   if (loading) {
     return <Loading />;
   }

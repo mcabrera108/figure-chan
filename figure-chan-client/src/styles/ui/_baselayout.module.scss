@@ -7,6 +7,13 @@
   border-radius: 5px;
   background-color: var(--layout-bg-default-ctn-color);
 }
+.errorPageContainer {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 2rem;
+}
 .base {
   display: flex;
   justify-content: center;
