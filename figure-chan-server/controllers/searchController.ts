@@ -1,6 +1,6 @@
 import { prisma } from "../lib/prisma.ts";
 
-export async function fetchSearchResultPreview(req: any, res: any, next: any) {
+export async function searchResultPreview(req: any, res: any, next: any) {
   try {
     const { searchValue } = req.body;
     const response = await prisma.items.findMany({

@@ -44,7 +44,6 @@ const options = {
   jwtFromRequest: cookieExtractor,
   secretOrKey: process.env.JWT_SECRET_DEV as string,
 };
-
 passport.use(
   new JWTStrategy(options, async (payload: any, done: VerifiedCallback) => {
     try {

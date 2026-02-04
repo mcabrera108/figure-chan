@@ -1,11 +1,8 @@
 import express from "express";
-import {
-  fetchUserProfile,
-  registerUser,
-} from "../controllers/userController.ts";
+import { getUserProfile, registerUser } from "../controllers/userController.ts";
 import passport from "passport";
 import jwt from "jsonwebtoken";
-import { fetchSearchResultPreview } from "../controllers/searchController.ts";
+import { searchResultPreview } from "../controllers/searchController.ts";
 
 const router = express.Router();
 
@@ -16,6 +13,7 @@ router.get("/", (req, res) => {
 });
 
 router.post("/register", registerUser);
+
 router.post("/login", (req, res, next) => {
   passport.authenticate(
     "local",
@@ -52,9 +50,10 @@ router.post("/login", (req, res, next) => {
           profilePic: user.profileId.profilePhoto,
         });
       });
-    }
+    },
   )(req, res, next);
 });
+
 router.post("/auth", (req, res, next) => {
   passport.authenticate(
     "jwt",
@@ -74,9 +73,10 @@ router.post("/auth", (req, res, next) => {
           profilePic: user.profileId.profilePhoto,
         });
       }
-    }
+    },
   )(req, res, next);
 });
+
 router.post("/logout", (req, res, next) => {
   res.clearCookie("token");
 
@@ -86,6 +86,8 @@ router.post("/logout", (req, res, next) => {
     message: "Logged out successfully.",
   });
 });
-router.get("/profile/:id", fetchUserProfile);
-router.post("/search", fetchSearchResultPreview);
+
+router.get("/profile/:id", getUserProfile);
+
+router.post("/search", searchResultPreview);
 export default router;

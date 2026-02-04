@@ -1,11 +1,8 @@
-import { blacklistUserToken, registerUserQuery } from "../config/queries.ts";
+import {
+  blacklistUserTokenQuery,
+  registerUserQuery,
+} from "../config/queries.ts";
 import { prisma } from "../lib/prisma.ts";
-
-import dotenv from "dotenv";
-
-dotenv.config({
-  path: [".env.dev", ".env.prod"],
-});
 
 export async function registerUser(req: any, res: any, next: any) {
   try {
@@ -44,15 +41,18 @@ export async function registerUser(req: any, res: any, next: any) {
     } else {
       throw new Error("Unable to register User");
     }
-  } catch (error) {
-    res.status(400).json({ message: "Unable to connect to database: ", error });
+  } catch (error: any) {
+    res.status(400).json({
+      message: "Unable to connect to database. An error has occurred. ",
+    });
   } finally {
     next();
   }
 }
+
 export async function logoutUser(req: any, res: any, next: any) {
   try {
-    const response = await blacklistUserToken();
+    const response = await blacklistUserTokenQuery();
     if (response) {
       res.status(200).json({
         message: "Successfully Logged Out",
@@ -69,7 +69,7 @@ export async function logoutUser(req: any, res: any, next: any) {
   }
 }
 
-export async function fetchUserProfile(req: any, res: any, next: any) {
+export async function getUserProfile(req: any, res: any, next: any) {
   try {
     const { id } = req.params;
     const response = await prisma.users.findFirst({

@@ -1,7 +1,5 @@
 # Keep environment variables out of version control
 .env
-.env.dev
-.env.prod
 # Logs
 logs
 *.log
@@ -27,4 +25,5 @@ dist-ssr
 *.sln
 *.sw?
 
+/generated/prisma
 /generated/prisma

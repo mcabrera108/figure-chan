@@ -2,19 +2,18 @@ import { prisma } from "../lib/prisma.ts";
 
 async function main() {
   // // Create a new user with a post
-  // const user = await prisma.users.create({
-  //   data: {
-  //     email: "example@email.com",
-  //     password: "ExamplePassword",
-  //     username: "TestUser01",
-  //     role: "User",
-  //     emailVerified: false,
-  //   },
-  // });
-  // console.log("Created user:", user);
-  // // Fetch all users with their posts
-  // const allUsers = await prisma.users.findMany();
-  // console.log("All users:", JSON.stringify(allUsers, null, 2));
+  const user = await prisma.users.create({
+    data: {
+      email: "example@email.com",
+      password: "ExamplePassword",
+      username: "TestUser01",
+      role: "User",
+      emailVerified: false,
+    },
+  });
+
+  // Fetch all users with their posts
+  const allUsers = await prisma.users.findMany();
   //await prisma.users.deleteMany({});
   //To run: npx tsx config/script.ts
   // const companiesToCreate = [
@@ -147,40 +146,40 @@ async function main() {
   //   data: seriesToCreate,
   //   skipDuplicates: true,
   // });
-  const seriesEntryToCreate = [
-    {
-      title: "VOCALOID1",
-      seriesId: 6,
-    },
-    {
-      title: "Super Mario Bros.",
-      seriesId: 2,
-    },
-    {
-      title: "Legend of Heroes: Trails in the Sky",
-      seriesId: 3,
-    },
-    {
-      title: "Fate Stay/Night",
-      seriesId: 4,
-    },
-    {
-      title: "Naruto",
-      seriesId: 5,
-    },
-    {
-      title: "The Legend of Zelda",
-      seriesId: 1,
-    },
-    {
-      title: "Pokemon Red/Blue",
-      seriesId: 7,
-    },
-  ];
-  const createSeriesEntry = await prisma.seriesEntry.createMany({
-    data: seriesEntryToCreate,
-    skipDuplicates: true,
-  });
+  // const seriesEntryToCreate = [
+  //   {
+  //     title: "VOCALOID1",
+  //     seriesId: 6,
+  //   },
+  //   {
+  //     title: "Super Mario Bros.",
+  //     seriesId: 2,
+  //   },
+  //   {
+  //     title: "Legend of Heroes: Trails in the Sky",
+  //     seriesId: 3,
+  //   },
+  //   {
+  //     title: "Fate Stay/Night",
+  //     seriesId: 4,
+  //   },
+  //   {
+  //     title: "Naruto",
+  //     seriesId: 5,
+  //   },
+  //   {
+  //     title: "The Legend of Zelda",
+  //     seriesId: 1,
+  //   },
+  //   {
+  //     title: "Pokemon Red/Blue",
+  //     seriesId: 7,
+  //   },
+  // ];
+  // const createSeriesEntry = await prisma.seriesEntry.createMany({
+  //   data: seriesEntryToCreate,
+  //   skipDuplicates: true,
+  // });
 }
 
 main()

@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 export async function registerUserQuery(
   username: string,
   password: string,
-  email: string
+  email: string,
 ) {
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -19,7 +19,7 @@ export async function registerUserQuery(
       },
     });
 
-    const profileResponse = await prisma.profile.create({
+    const profileResponse = await prisma.profiles.create({
       data: {
         profilePhoto: "frog-chair_i2j0qw",
         userId: response.id,
@@ -49,7 +49,8 @@ export async function loginUserQuery(username: string, password: string) {
     return false;
   }
 }
-export async function blacklistUserToken() {
+
+export async function blacklistUserTokenQuery() {
   try {
     return true;
   } catch (error) {
