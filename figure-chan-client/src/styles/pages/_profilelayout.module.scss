@@ -16,26 +16,31 @@
   height: 100%;
   display: flex;
   justify-content: center;
-  // gap: 1em;
-  // padding: 1em;
-  // flex-direction: column;
 }
 .editProfileWrapper {
   width: 60%;
   display: flex;
   flex-direction: column;
   gap: 1em;
+  padding: 0.5em;
 }
 .editProfileField {
   display: flex;
   width: 100%;
   justify-content: space-between;
   margin-bottom: 1em;
+  font-size: clamp(0.5rem, calc(0.8rem + 0.5vw), 1.2rem);
+}
+.editProfileField span {
+  max-width: 50%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .profileSettingsHeader {
-  font-size: 1.5rem;
   margin-bottom: 0.5em;
   font-weight: 600;
+  font-size: clamp(0.8rem, calc(1rem + 0.7vw), 1.5rem);
 }
 .editProfileMainContainer {
   width: 100%;
@@ -48,7 +53,7 @@
 .settingHeaderContainer ul {
   display: flex;
   gap: 1em;
-  font-size: 1.3rem;
+  font-size: clamp(0.5rem, calc(0.8rem + 0.5vw), 1.2rem);
 }
 
 .settingHeaderContainer ul li:hover {

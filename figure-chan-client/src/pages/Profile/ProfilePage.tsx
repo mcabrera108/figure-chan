@@ -38,6 +38,7 @@ function ProfilePage() {
     profileReducer,
     initialProfileState,
   );
+  const user = useAppSelector((state) => state.user);
   const notification = useAppSelector((state) => state.notification);
   const profileDispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -70,7 +71,6 @@ function ProfilePage() {
     renderProfileView();
   }, [id, navigate, profileDispatch]);
 
-  useEffect(() => {}, [profileDispatch, notification]);
   return (
     <>
       {notification ? (
@@ -88,10 +88,17 @@ function ProfilePage() {
               src={profileState.profilePhoto?.toURL()}
               className={style.profileBannerImg}
             />
-            <Link to={"/profile/edit/account"} className={style.editButton}>
-              <IconButton iconImg={faPencilSquare} iconClass={style.editIcon} />
-              Edit Profile
-            </Link>
+            {user.username ? (
+              <Link to={"/profile/edit/account"} className={style.editButton}>
+                <IconButton
+                  iconImg={faPencilSquare}
+                  iconClass={style.editIcon}
+                />
+                Edit Profile
+              </Link>
+            ) : (
+              <></>
+            )}
           </div>
           <div className={style.profileNavigationContainer}></div>
         </div>

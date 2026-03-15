@@ -5,7 +5,28 @@ function EditProfilePage() {
     <div className={style.editProfilePageContainer}>
       <div className={style.editProfileWrapper}>
         <ProfileSettingsHeader />
-        <div>Hello</div>
+        <div className={style.editProfileMainContainer}>
+          <div className={style.editProfileField}>
+            <span>Banner Background</span>
+            <span></span>
+          </div>
+          <div className={style.editProfileField}>
+            <span>Banner Color</span>
+            <span></span>
+          </div>
+          <div className={style.editProfileField}>
+            <span>Navigation Color</span>
+            <span></span>
+          </div>
+          <div className={style.editProfileField}>
+            <span>Profile Background</span>
+            <span></span>
+          </div>
+          <div className={style.editProfileField}>
+            <span>Content Card Color</span>
+            <span></span>
+          </div>
+        </div>
       </div>
     </div>
   );

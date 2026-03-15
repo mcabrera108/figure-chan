@@ -40,7 +40,21 @@ export async function loginUserAPI(username: string, password: string) {
 
   return response;
 }
+export async function getUserAccountSettingsAPI(username: string) {
+  const requestOptions = {
+    mode: "cors",
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+    credentials: "include",
+  };
 
+  const response = await fetch(
+    `http://localhost:3000/settings/account/${username}`,
+    requestOptions as RequestInit,
+  );
+
+  return response;
+}
 export async function getUserProfileAPI(username: string) {
   const requestOptions = {
     mode: "cors",
