@@ -3,6 +3,7 @@ import path from "node:path";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import indexRouter from "./routes/index.ts";
+import settingsRouter from "./routes/setting.ts";
 import rateLimit from "express-rate-limit";
 import compression from "compression";
 import "dotenv/config";
@@ -38,6 +39,7 @@ import "./config/passport.ts";
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use("/", indexRouter);
+app.use("/settings", settingsRouter);
 
 app.listen(3000, (error) => {
   if (error) {

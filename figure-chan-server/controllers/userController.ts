@@ -96,3 +96,54 @@ export async function getUserProfile(req: any, res: any, next: any) {
     next();
   }
 }
+
+export async function getAccountSettings(req: any, res: any, next: any) {
+  try {
+    const { id } = req.params;
+    const response = await prisma.users.findFirst({
+      where: {
+        username: id,
+      },
+      include: {
+        profileId: true,
+      },
+    });
+    console.log(response);
+    if (response) {
+      res.status(200).json({
+        message: "Successfully fetched account settings",
+        username: response.username,
+        email: response.email,
+        authenticated: response.email,
+      });
+    }
+  } catch (error) {
+    res.status(400).json({ message: "Error while fetching account settings" });
+  } finally {
+    next();
+  }
+}
+
+export async function getProfileSettings(req: any, res: any, next: any) {
+  try {
+    const { id } = req.params;
+    const response = await prisma.users.findFirst({
+      where: {
+        username: id,
+      },
+      include: {
+        profileId: true,
+      },
+    });
+
+    if (response) {
+      res.status(200).json({
+        message: "Successfully fetched profile settings",
+      });
+    }
+  } catch (error) {
+    res.status(400).json({ message: "Error while fetching profile settings" });
+  } finally {
+    next();
+  }
+}
